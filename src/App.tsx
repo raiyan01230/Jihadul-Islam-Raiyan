@@ -49,16 +49,9 @@ export default function App() {
     }
   };
 
-  // Open the AI chatbot by clicking on Hero button
+  // Open the AI chatbot from Hero button
   const triggerOpenChat = () => {
-    // We will trigger a click event on the floating chat button
-    const chatBtn = document.querySelector('button[title="Chat with Raiyan AI"]') as HTMLButtonElement;
-    if (chatBtn) {
-      chatBtn.click();
-    } else {
-      // If chatbot is already open, do nothing or force state
-      setChatBotOpen(true);
-    }
+    setChatBotOpen(true);
   };
 
   // Simulation handlers for custom 404/500 screens
@@ -437,7 +430,7 @@ export default function App() {
       </footer>
 
       {/* Collapsible/Floating interactive AI Chat Companion */}
-      <AIChatBot />
+      <AIChatBot isOpen={chatBotOpen} onOpenChange={setChatBotOpen} />
 
     </div>
   );

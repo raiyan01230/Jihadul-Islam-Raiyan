@@ -155,7 +155,7 @@ export default function ContactSection() {
                   <CheckCircle className="w-4 h-4 shrink-0 mt-0.5" />
                   <div>
                     <p className="font-bold">Message Lodged Successfully!</p>
-                    <p className="text-slate-400 mt-1">Our live Firebase database has cataloged this message safely. An auto-reply envelope was triggered below.</p>
+                    <p className="text-slate-400 mt-1">Our backend API has logged your message safely. An auto-reply confirmation is shown on the left.</p>
                   </div>
                 </div>
               )}

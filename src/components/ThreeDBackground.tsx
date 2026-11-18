@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface Particle {
   x: number;
@@ -10,7 +10,7 @@ interface Particle {
 
 export default function ThreeDBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [mouse, setMouse] = useState({ x: 0, y: 0, targetX: 0, targetY: 0 });
+  const mouseRef = useRef({ targetX: 0, targetY: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -45,14 +45,10 @@ export default function ThreeDBackground() {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Normalize mouse coordinates around the center
       const x = e.clientX - window.innerWidth / 2;
       const y = e.clientY - window.innerHeight / 2;
-      setMouse((prev) => ({
-        ...prev,
-        targetX: x * 0.4,
-        targetY: y * 0.4,
-      }));
+      mouseRef.current.targetX = x * 0.4;
+      mouseRef.current.targetY = y * 0.4;
     };
 
     window.addEventListener('resize', handleResize);
@@ -65,55 +61,45 @@ export default function ThreeDBackground() {
     let angleY = 0.001;
 
     const render = () => {
-      ctx.fillStyle = 'rgba(2, 6, 23, 0.08)'; // Keep trailing effect for glowing look
+      ctx.fillStyle = 'rgba(2, 6, 23, 0.08)';
       ctx.fillRect(0, 0, width, height);
 
       // Smooth mouse easing
-      currentMouseX += (mouse.targetX - currentMouseX) * 0.05;
-      currentMouseY += (mouse.targetY - currentMouseY) * 0.05;
+      currentMouseX += (mouseRef.current.targetX - currentMouseX) * 0.05;
+      currentMouseY += (mouseRef.current.targetY - currentMouseY) * 0.05;
 
       // Dynamic rotation angles based on mouse
       const rotY = (currentMouseX * 0.00005) + angleY;
       const rotX = (currentMouseY * 0.00005) + angleX;
 
-      // Rotation matrix values
       const cosY = Math.cos(rotY);
       const sinY = Math.sin(rotY);
       const cosX = Math.cos(rotX);
       const sinX = Math.sin(rotX);
 
-      // Draw starry nodes
       particles.forEach((p) => {
-        // Rotate around Y axis
-        let x1 = p.x * cosY - p.z * sinY;
-        let z1 = p.z * cosY + p.x * sinY;
+        const x1 = p.x * cosY - p.z * sinY;
+        const z1 = p.z * cosY + p.x * sinY;
 
-        // Rotate around X axis
-        let y2 = p.y * cosX - z1 * sinX;
-        let z2 = z1 * cosX + p.y * sinX;
+        const y2 = p.y * cosX - z1 * sinX;
+        const z2 = z1 * cosX + p.y * sinX;
 
-        // Apply mouse displacement / Parallax depth
         const depthFactor = 800 / (800 + z2);
-        
-        // 3D Perspective Projection
         const screenX = width / 2 + x1 * depthFactor;
         const screenY = height / 2 + y2 * depthFactor;
 
-        // Keep inside bounds (wrap around coordinates)
-        p.z -= 1.5; // Move towards camera (zoom-in space warp effect)
+        p.z -= 1.5;
         if (p.z <= -800) {
-          p.z = 1200; // Reset back to distance
+          p.z = 1200;
           p.x = (Math.random() - 0.5) * 1600;
           p.y = (Math.random() - 0.5) * 1600;
         }
 
         if (screenX >= 0 && screenX <= width && screenY >= 0 && screenY <= height && z2 > -750) {
-          // Draw particle
           ctx.beginPath();
           const radius = Math.max(0.5, p.size * depthFactor * 1.5);
           ctx.arc(screenX, screenY, radius, 0, Math.PI * 2);
-          
-          // Outer glow
+
           ctx.shadowBlur = radius * 3;
           ctx.shadowColor = p.color;
           ctx.fillStyle = p.color;
@@ -121,8 +107,7 @@ export default function ThreeDBackground() {
         }
       });
 
-      // Draw subtle network grid lines between nearby nodes
-      ctx.shadowBlur = 0; // Reset shadow for efficiency
+      ctx.shadowBlur = 0;
       ctx.strokeStyle = 'rgba(6, 182, 212, 0.025)';
       ctx.lineWidth = 0.5;
 
@@ -147,7 +132,6 @@ export default function ThreeDBackground() {
         }
       }
 
-      // Constantly apply very slow auto-rotation
       angleX += 0.0002;
       angleY += 0.0003;
 
@@ -161,7 +145,7 @@ export default function ThreeDBackground() {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [mouse.targetX, mouse.targetY]);
+  }, []);
 
   return (
     <canvas

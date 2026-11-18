@@ -6,6 +6,7 @@ export default function InteractiveResume() {
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [showPrintModal, setShowPrintModal] = useState(false);
+  const [printNotice, setPrintNotice] = useState('');
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -26,10 +27,11 @@ export default function InteractiveResume() {
   };
 
   const handleDirectPrintTrigger = () => {
+    setPrintNotice('');
     try {
       window.print();
-    } catch (e) {
-      alert("Direct printing is blocked by the preview window. Please open the app in a standalone tab using the link below!");
+    } catch {
+      setPrintNotice('Direct printing is blocked by the preview window. Please open the app in a standalone tab using the link below.');
     }
   };
 
@@ -141,6 +143,12 @@ export default function InteractiveResume() {
                   <p>3. Choose "Save as PDF" with background colors enabled!</p>
                 </div>
               </div>
+
+              {printNotice && (
+                <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono">
+                  {printNotice}
+                </div>
+              )}
 
               <div className="flex flex-wrap items-center gap-3">
                 <button

@@ -2,8 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import { MessageSquare, X, Send, Sparkles, BrainCircuit, CornerDownRight, Copy, Check } from 'lucide-react';
 import { ChatMessage } from '../types';
 
-export default function AIChatBot() {
-  const [isOpen, setIsOpen] = useState(false);
+interface AIChatBotProps {
+  isOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export default function AIChatBot({ isOpen: controlledOpen, onOpenChange }: AIChatBotProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
+  const setIsOpen = (open: boolean) => {
+    setInternalOpen(open);
+    onOpenChange?.(open);
+  };
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome',
@@ -94,6 +104,7 @@ export default function AIChatBot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
+          title="Chat with Raiyan AI"
           className="fixed bottom-6 right-6 z-40 p-4 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 hover:opacity-90 shadow-2xl hover:scale-105 active:scale-95 transition-all text-white cursor-pointer group border border-cyan-400/20"
         >
           <div className="relative">
@@ -120,7 +131,7 @@ export default function AIChatBot() {
                 <h4 className="text-sm font-bold font-display text-white">Raiyan AI Copilot</h4>
                 <p className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                  Gemini 3.5 Live Active
+                  Gemini 4 AI Active
                 </p>
               </div>
             </div>
