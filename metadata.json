@@ -1,0 +1,6 @@
+{
+  "name": "Raiyan Portfolio",
+  "description": "An enterprise-grade, state-of-the-art interactive developer portfolio for Raiyan featuring custom glassmorphic styling, an AI Chatbot Assistant, an interactive resume, project catalog, and a certification wall.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

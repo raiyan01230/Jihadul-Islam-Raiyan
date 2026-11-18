@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="cyanText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#2dd4bf" />
+    </linearGradient>
+    <linearGradient id="purpleText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="25" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Dark Canvas -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+  
+  <!-- Subtle Grid Lines -->
+  <path d="M 0 100 L 1200 100 M 0 200 L 1200 200 M 0 300 L 1200 300 M 0 400 L 1200 400 M 0 500 L 1200 500" stroke="#1e293b" stroke-width="1" stroke-dasharray="8,8" opacity="0.4" />
+  <path d="M 200 0 L 200 630 M 400 0 L 400 630 M 600 0 L 600 630 M 800 0 L 800 630 M 1000 0 L 1000 630" stroke="#1e293b" stroke-width="1" stroke-dasharray="8,8" opacity="0.4" />
+
+  <!-- Ambient Glow Orbs -->
+  <circle cx="200" cy="150" r="180" fill="#06b6d4" opacity="0.12" filter="url(#glow)" />
+  <circle cx="1000" cy="480" r="220" fill="#a855f7" opacity="0.12" filter="url(#glow)" />
+
+  <!-- Outer Frame -->
+  <rect x="40" y="40" width="1120" height="550" rx="24" fill="none" stroke="#334155" stroke-width="2" opacity="0.6" />
+
+  <!-- Badge / Tag -->
+  <rect x="80" y="90" width="280" height="42" rx="21" fill="#0f172a" stroke="#06b6d4" stroke-width="1.5" />
+  <text x="100" y="117" font-family="monospace" font-size="14" font-weight="bold" fill="#22d3ee" letter-spacing="2">FULL-STACK DEVELOPER</text>
+
+  <!-- Main Headline -->
+  <text x="80" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="800" fill="#ffffff">Jihadul Islam Raiyan</text>
+  <text x="80" y="295" font-family="system-ui, -apple-system, sans-serif" font-size="44" font-weight="700" fill="url(#cyanText)">Interactive Software & Web Architect</text>
+
+  <!-- Subtitle Description -->
+  <text x="80" y="370" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#94a3b8">Specializing in React, TypeScript, Node.js, Firebase & C Algorithmic Optimization.</text>
+  <text x="80" y="405" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#94a3b8">Building high-performance e-commerce platforms, AI integrations & spiritual tools.</text>
+
+  <!-- Bottom Chips / Stats -->
+  <g transform="translate(80, 470)">
+    <!-- Chip 1 -->
+    <rect x="0" y="0" width="180" height="50" rx="12" fill="#1e293b" stroke="#334155" />
+    <text x="20" y="30" font-family="monospace" font-size="14" fill="#38bdf8" font-weight="bold">⚡ React 18 / Vite</text>
+
+    <!-- Chip 2 -->
+    <rect x="200" y="0" width="180" height="50" rx="12" fill="#1e293b" stroke="#334155" />
+    <text x="220" y="30" font-family="monospace" font-size="14" fill="#a855f7" font-weight="bold">🔥 Firebase Sync</text>
+
+    <!-- Chip 3 -->
+    <rect x="400" y="0" width="200" height="50" rx="12" fill="#1e293b" stroke="#334155" />
+    <text x="420" y="30" font-family="monospace" font-size="14" fill="#34d399" font-weight="bold">🤖 Gemini 2.5 AI</text>
+
+    <!-- Chip 4 -->
+    <rect x="620" y="0" width="220" height="50" rx="12" fill="#1e293b" stroke="#334155" />
+    <text x="640" y="30" font-family="monospace" font-size="14" fill="#fbbf24" font-weight="bold">🏆 Verified Credentials</text>
+  </g>
+</svg>
